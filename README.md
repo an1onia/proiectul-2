@@ -1,9 +1,5 @@
-# рандомайзер цветов
-на этой странице можно будет узнавать новые цвета и ассоцияции с цветами
+# README
 
-##  как пользоватся?
-Откройте файл `index.html` в браузере. Установка не требуется.
+## randomizator de culori
 
-### 
-Присней Дарья
-Бокшанян Антония
+Pe această pagină vei putea descoperi culori noi și asocierile lor.
