@@ -114,6 +114,64 @@ function getRandomShade(hue, type = "any") {
     return { hex, rgb, hsl };
 }
 
+// ========== ФУНКЦИЯ КОПИРОВАНИЯ ==========
+function showCopyToast(text, type) {
+    // Удаляем старое уведомление
+    const oldToast = document.querySelector('.copy-toast');
+    if (oldToast) oldToast.remove();
+    
+    // Создаём уведомление
+    const toast = document.createElement('div');
+    toast.className = 'copy-toast';
+    toast.textContent = `📋 Скопировано ${type}: ${text}`;
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: #1e293b;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 50px;
+        font-size: 14px;
+        font-weight: 500;
+        z-index: 9999;
+        opacity: 0;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+        font-family: monospace;
+        white-space: nowrap;
+        pointer-events: none;
+    `;
+    document.body.appendChild(toast);
+    
+    // Показываем
+    setTimeout(() => {
+        toast.style.transform = 'translateX(-50%) translateY(0)';
+        toast.style.opacity = '1';
+    }, 10);
+    
+    // Скрываем через 2 секунды
+    setTimeout(() => {
+        toast.style.transform = 'translateX(-50%) translateY(100px)';
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+    }, 2000);
+}
+
+async function copyToClipboard(text, type) {
+    try {
+        await navigator.clipboard.writeText(text);
+        showCopyToast(text, type);
+        return true;
+    } catch (err) {
+        console.error('Ошибка копирования:', err);
+        showCopyToast('Ошибка копирования', '❌');
+        return false;
+    }
+}
+
+// ========== ИНИЦИАЛИЗАЦИЯ ==========
 // Ждем полной загрузки страницы
 document.addEventListener("DOMContentLoaded", function() {
     // Находим все нужные элементы
@@ -122,29 +180,111 @@ document.addEventListener("DOMContentLoaded", function() {
     const hexSpan = document.querySelector(".hex-code");
     const rgbSpan = document.querySelector(".rgb-code");
     const hslSpan = document.querySelector(".hsl-code");
+    const nameSpan = document.querySelector(".name");
+    
+    // Переменная для хранения текущего цвета
+    let currentColor = null;
+    
+    // Функция обновления цвета на странице
+    function updateColorDisplay(color) {
+        if (colorBox) colorBox.style.backgroundColor = color.hex;
+        if (hexSpan) hexSpan.textContent = color.hex;
+        if (rgbSpan) rgbSpan.textContent = color.rgb;
+        if (hslSpan) hslSpan.textContent = color.hsl;
+        if (nameSpan) nameSpan.textContent = color.hex;
+        currentColor = color;
+        console.log("Сгенерирован цвет:", color);
+    }
     
     // Проверяем, что все элементы найдены
     if (button && colorBox) {
+        // Генерируем первый цвет
+        const firstColor = getRandomColor();
+        updateColorDisplay(firstColor);
+        
         // Добавляем обработчик клика на кнопку
         button.addEventListener("click", function() {
-            // Генерируем случайный цвет
             const color = getRandomColor();
-            
-            // Меняем цвет прямоугольника (НЕ весь экран)
-            colorBox.style.backgroundColor = color.hex;
-            
-            // Обновляем коды цветов внизу
-            if (hexSpan) hexSpan.textContent = color.hex;
-            if (rgbSpan) rgbSpan.textContent = color.rgb;
-            if (hslSpan) hslSpan.textContent = color.hsl;
-            
-            // Выводим в консоль для отладки
-            console.log("Сгенерирован цвет:", color);
+            updateColorDisplay(color);
         });
     } else {
         console.error("Не удалось найти элементы на странице. Проверьте классы в HTML.");
         console.log("Найден button:", button);
         console.log("Найден color-box:", colorBox);
+    }
+    
+    // ========== ДОБАВЛЯЕМ КОПИРОВАНИЕ ==========
+    
+    // Копирование HEX при клике на прямоугольник
+    if (colorBox) {
+        colorBox.addEventListener("click", function() {
+            if (currentColor && currentColor.hex) {
+                copyToClipboard(currentColor.hex, "HEX");
+            } else if (hexSpan && hexSpan.textContent) {
+                copyToClipboard(hexSpan.textContent, "HEX");
+            }
+        });
+        // Добавляем подсказку
+        colorBox.style.cursor = "pointer";
+        colorBox.title = "Кликни, чтобы скопировать HEX";
+    }
+    
+    // Копирование при клике на блоки с кодами
+    if (hexSpan) {
+        const hexItem = hexSpan.closest('.code-item');
+        if (hexItem) {
+            hexItem.style.cursor = "pointer";
+            hexItem.title = "Кликни, чтобы скопировать HEX";
+            hexItem.addEventListener("click", function(e) {
+                e.stopPropagation();
+                copyToClipboard(hexSpan.textContent, "HEX");
+            });
+        } else {
+            hexSpan.style.cursor = "pointer";
+            hexSpan.title = "Кликни, чтобы скопировать HEX";
+            hexSpan.addEventListener("click", function(e) {
+                e.stopPropagation();
+                copyToClipboard(hexSpan.textContent, "HEX");
+            });
+        }
+    }
+    
+    if (rgbSpan) {
+        const rgbItem = rgbSpan.closest('.code-item');
+        if (rgbItem) {
+            rgbItem.style.cursor = "pointer";
+            rgbItem.title = "Кликни, чтобы скопировать RGB";
+            rgbItem.addEventListener("click", function(e) {
+                e.stopPropagation();
+                copyToClipboard(rgbSpan.textContent, "RGB");
+            });
+        } else {
+            rgbSpan.style.cursor = "pointer";
+            rgbSpan.title = "Кликни, чтобы скопировать RGB";
+            rgbSpan.addEventListener("click", function(e) {
+                e.stopPropagation();
+                copyToClipboard(rgbSpan.textContent, "RGB");
+            });
+        }
+    }
+    
+    if (hslSpan) {
+        const hslItem = hslSpan.closest('.code-item');
+        if (hslItem) {
+            hslItem.style.cursor = "pointer";
+            hslItem.title = "Кликни, чтобы скопировать HSL";
+            hslItem.addEventListener("click", function(e) {
+                e.stopPropagation();
+                copyToClipboard(hslSpan.textContent, "HSL");
+            });
+        } else {
+            hslSpan.style.cursor = "pointer";
+            hslSpan.title = "Кликни, чтобы скопировать HSL";
+            hslSpan.addEventListener("click", function(e) {
+                e.stopPropagation();
+                copyToClipboard(hslSpan.textContent, "HSL");
+            });
+        }
     }
 });
 
