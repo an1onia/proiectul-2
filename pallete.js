@@ -114,45 +114,83 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Функция отображения цветов в палитре
-    function renderPalette(colors) {
-        const container = document.querySelector('.paleta-culori');
-        if (!container) return;
+function renderPalette(colors) {
+    const container = document.querySelector('.paleta-culori');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    // Убираем все inline-стили, чтобы работал CSS
+    container.style.display = '';
+    container.style.flexWrap = '';
+    container.style.gap = '';
+    container.style.maxWidth = '';
+    container.style.listStyle = '';
+    container.style.padding = '';
+    
+    // Добавляем класс для сетки 5 колонок
+    container.style.display = 'grid';
+    container.style.gridTemplateColumns = 'repeat(5, 1fr)';
+    container.style.gap = '12px';
+    container.style.listStyle = 'none';
+    container.style.padding = '0';
+    container.style.margin = '0';
+    
+    colors.forEach(color => {
+        const colorItem = document.createElement('li');
+        colorItem.className = 'palette-item';
+        colorItem.style.backgroundColor = color.hex;
+        colorItem.style.width = '100%';
+        colorItem.style.aspectRatio = '1 / 1';
+        colorItem.style.borderRadius = '12px';
+        colorItem.style.cursor = 'pointer';
+        colorItem.style.transition = 'all 0.2s ease';
+        colorItem.style.border = '2px solid rgba(255, 255, 255, 0.6)';
+        colorItem.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.1)';
         
-        container.innerHTML = '';
-        container.style.display = 'flex';
-        container.style.flexWrap = 'wrap';
-        container.style.gap = '10px';
-        container.style.maxWidth = '340px';
-        container.style.listStyle = 'none';
-        container.style.padding = '0';
+        // Добавляем подсказку с HEX кодом
+        colorItem.setAttribute('data-hex', color.hex);
         
-        colors.forEach(color => {
-            const colorItem = document.createElement('li');
-            colorItem.className = 'palette-item';
-            colorItem.style.backgroundColor = color.hex;
-            colorItem.style.width = '60px';
-            colorItem.style.height = '60px';
-            colorItem.style.borderRadius = '8px';
-            colorItem.style.cursor = 'pointer';
-            colorItem.style.margin = '0';
+        colorItem.addEventListener('click', () => {
+            // Находим элементы на главной странице
+            const colorBox = document.querySelector('.color-box');
+            const hexSpan = document.querySelector('.hex-code');
+            const rgbSpan = document.querySelector('.rgb-code');
+            const hslSpan = document.querySelector('.hsl-code');
+            const nameSpan = document.querySelector('.name');
             
-            colorItem.addEventListener('click', () => {
-                const colorBox = document.querySelector('.color-box');
-                const hexSpan = document.querySelector('.hex-code');
-                const rgbSpan = document.querySelector('.rgb-code');
-                const hslSpan = document.querySelector('.hsl-code');
-                const nameSpan = document.querySelector('.name');
-                
-                if (colorBox) colorBox.style.backgroundColor = color.hex;
-                if (hexSpan) hexSpan.textContent = color.hex;
-                if (rgbSpan) rgbSpan.textContent = color.rgb;
-                if (hslSpan) hslSpan.textContent = color.hsl;
-                if (nameSpan) nameSpan.textContent = color.hex;
-            });
+            // Обновляем цвета и коды в прямоугольнике
+            if (colorBox) {
+                colorBox.style.backgroundColor = color.hex;
+                // Добавляем плавную анимацию
+                colorBox.style.transition = 'background-color 0.3s ease';
+            }
+            if (hexSpan) hexSpan.textContent = color.hex;
+            if (rgbSpan) rgbSpan.textContent = color.rgb;
+            if (hslSpan) hslSpan.textContent = color.hsl;
+            if (nameSpan) nameSpan.textContent = color.hex;
             
-            container.appendChild(colorItem);
+            // Визуальная обратная связь при клике
+            colorItem.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                colorItem.style.transform = 'scale(1)';
+            }, 150);
         });
-    }
+        
+        // Эффект при наведении
+        colorItem.addEventListener('mouseenter', () => {
+            colorItem.style.transform = 'translateY(-4px)';
+            colorItem.style.boxShadow = '0 12px 20px rgba(0, 0, 0, 0.2)';
+        });
+        
+        colorItem.addEventListener('mouseleave', () => {
+            colorItem.style.transform = 'translateY(0)';
+            colorItem.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.1)';
+        });
+        
+        container.appendChild(colorItem);
+    });
+}
 
     // Скрыть все ссылки "закрыть" изначально
     const allCloseLinks = document.querySelectorAll('.categoria-link');
