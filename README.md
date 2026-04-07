@@ -1,9 +1,9 @@
-# рандомайзер цветов
-на этой странице можно будет узнавать новые цвета и ассоцияции с цветами
+# Рандомайзер цветов
+Pagina web pentru persoanele ce doresc sa afle culori noi si asocieri cu ele
 
-##  как пользоватся?
-Откройте файл `index.html` в браузере. Установка не требуется.
+## Cum se deschide ?
+prin 'index.html' fara instalare
 
-### 
-Присней Дарья
-Бокшанян Антония
+### Construit de:
+Prisnei Daria
+Bocsanean Antonia
