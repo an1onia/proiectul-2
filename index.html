@@ -14,29 +14,35 @@
             <li onclick="window.location.href='galeria.html'"> <img src="img/logo-meniu.png" width="20px"> </li>
         </ul>
     </nav>
-    <div class="container">
 
-        <h1 class="name"> Название цвета </h1>
+        <h1 class="name" data-i18n="colorName"> Название цвета </h1>
         <div class="color-box"></div>
         
         <div class="color-codes">
             <div class="code-item">
-                <span class="code-label">HEX:</span>
+                <span class="code-label" data-i18n="hex">HEX:</span>
                 <span class="hex-code">#000000</span>
             </div>
             <div class="code-item">
-                <span class="code-label">RGB:</span>
+                <span class="code-label" data-i18n="rgb">RGB:</span>
                 <span class="rgb-code">rgb(0, 0, 0)</span>
             </div>
             <div class="code-item">
-                <span class="code-label">HSL:</span>
+                <span class="code-label" data-i18n="hsl">HSL:</span>
                 <span class="hsl-code">hsl(0, 0%, 0%)</span>
             </div>
         </div>
         
-        <button class="button">тыкни</button>
+        <button class="button" data-i18n="button">тыкни</button>
     </div>
 
-    <script src="generator.js"></script>
+    <div id="language-selector" class="language-selector">
+        <button class="lang-main-btn" title="Выберите язык">RU</button>
+        <button class="lang-btn" data-lang="ru" title="Русский">RU</button>
+        <button class="lang-btn" data-lang="ro" title="Română">RO</button>
+        <button class="lang-btn" data-lang="en" title="English">EN</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
