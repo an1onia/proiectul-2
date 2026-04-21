@@ -94,18 +94,15 @@ document.addEventListener("DOMContentLoaded", function() {
             
             if (!categoryName) {
                 // Все цвета (случайные оттенки)
-                const randomHue = allHues[Math.floor(Math.random() * allHues.length)];
-                color = getRandomShade(randomHue, 'any');
+                color = getColorWithRange({});
             } else {
                 const params = categoryParams[categoryName];
-                if (params && (params.hueRange || params.hues)) {
-                    // Используем новую функцию с диапазонами
+                if (params) {
+                    // Используем функцию с диапазонами
                     color = getColorWithRange(params);
                 } else {
-                    // Fallback на старую логику
-                    const defaultParams = categoryParams[categoryName] || { hues: ['red', 'blue', 'green'], type: 'any' };
-                    const randomHue = defaultParams.hues[Math.floor(Math.random() * defaultParams.hues.length)];
-                    color = getRandomShade(randomHue, defaultParams.type);
+                    // Fallback - генерируем случайный цвет
+                    color = getColorWithRange({});
                 }
             }
             colors.push(color);

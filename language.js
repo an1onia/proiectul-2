@@ -25,41 +25,6 @@ const translations = {
     }
 };
 
-document.addEventListener('DOMContentLoaded', function() {
-    const savedLanguage = localStorage.getItem('language') || 'ru';
-    
-    setLanguage(savedLanguage);
-    
-    updateMainLanguageButton(savedLanguage);
-    
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const lang = this.getAttribute('data-lang');
-            setLanguage(lang);
-            localStorage.setItem('language', lang);
-            updateMainLanguageButton(lang);
-            
-            const selector = document.querySelector('.language-selector');
-            selector.classList.remove('open');
-        });
-    });
-    
-    const mainBtn = document.querySelector('.lang-main-btn');
-    if (mainBtn) {
-        mainBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            document.querySelector('.language-selector').classList.toggle('open');
-        });
-    }
-    
-    document.addEventListener('click', function() {
-        const selector = document.querySelector('.language-selector');
-        if (selector) {
-            selector.classList.remove('open');
-        }
-    });
-});
-
 function setLanguage(lang) {
     if (!translations[lang]) return;
     
@@ -79,3 +44,43 @@ function updateMainLanguageButton(language) {
         mainBtn.textContent = language.toUpperCase();
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const savedLanguage = localStorage.getItem('language') || 'ru';
+    
+    setLanguage(savedLanguage);
+    
+    updateMainLanguageButton(savedLanguage);
+    
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const lang = this.getAttribute('data-lang');
+            setLanguage(lang);
+            localStorage.setItem('language', lang);
+            updateMainLanguageButton(lang);
+            
+            const selector = document.querySelector('.language-selector');
+            if (selector) {
+                selector.classList.remove('open');
+            }
+        });
+    });
+    
+    const mainBtn = document.querySelector('.lang-main-btn');
+    if (mainBtn) {
+        mainBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const selector = document.querySelector('.language-selector');
+            if (selector) {
+                selector.classList.toggle('open');
+            }
+        });
+    }
+    
+    document.addEventListener('click', function() {
+        const selector = document.querySelector('.language-selector');
+        if (selector) {
+            selector.classList.remove('open');
+        }
+    });
+});
