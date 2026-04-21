@@ -399,23 +399,106 @@ body {
     animation: fadeInUp 0.5s ease-out;
 }
 
-/* Стиль для скролла — розовый */
-::-webkit-scrollbar {
-    width: 10px;
+/* Dark Theme */
+.dark-theme body {
+    background: #0d0d0d !important;
+    background-image: none !important;
+    color: #353535;
 }
 
-::-webkit-scrollbar-track {
-    background: #ffe4e9;
-    border-radius: 10px;
+.dark-theme .navbar {
+    background: #1a1a1a;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.7);
+    border-bottom: 1px solid #333;
 }
 
-::-webkit-scrollbar-thumb {
-    background: #f0a6b5;
-    border-radius: 10px;
+.dark-theme .navbar ul li:first-child {
+    color: #ffffff;
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #d4738a;
+.dark-theme .navbar ul li:last-child {
+    background: rgba(80, 80, 80, 0.2);
+}
+
+.dark-theme .navbar ul li:last-child:hover {
+    background: rgba(100, 100, 100, 0.4);
+}
+
+.dark-theme .container {
+    background: #1f1f1f;
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8);
+}
+
+.dark-theme .name {
+    color: #ffffff;
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+}
+
+.dark-theme .code-item {
+    background: #2a2a2a;
+    border: 1px solid #444;
+}
+
+.dark-theme .code-item:hover {
+    background: #333;
+    border-color: #666;
+}
+
+.dark-theme .code-label {
+    color: #aaa;
+}
+
+.dark-theme .hex-code, .dark-theme .rgb-code, .dark-theme .hsl-code {
+    color: #ffffff;
+}
+
+.dark-theme .button {
+    background: linear-gradient(135deg, #4a4a4a, #6a6a6a);
+    color: #ffffff;
+}
+
+.dark-theme .button:hover {
+    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.9);
+}
+
+.dark-theme .language-selector .lang-main-btn {
+    background: linear-gradient(135deg, #333, #555);
+    color: #ffffff;
+}
+
+.dark-theme .language-selector .lang-btn {
+    background: #2a2a2a;
+    color: #cccccc;
+    border: 1px solid #444;
+}
+
+.dark-theme .language-selector .lang-btn:hover {
+    background: #444;
+}
+
+.dark-theme .categoria-item {
+    background: #2a2a2a;
+    border: 1px solid #444;
+}
+
+.dark-theme .categoria-nume {
+    color: #ffffff;
+}
+
+.dark-theme .categoria-link {
+    color: #aaa;
+}
+
+.dark-theme .categoria-link:hover {
+    color: #ffffff;
+}
+.dark-theme .background {
+    background: #1f1f1f;
 }
 
 

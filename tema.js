@@ -1,3 +1,4 @@
+
 // Crearea celor două cerculețe
 const cercAlb = document.createElement('div');
 const cercNegru = document.createElement('div');
@@ -17,7 +18,6 @@ cercNegru.style.backgroundColor = 'black';
 cercNegru.style.border = '1px solid white';
 cercNegru.style.cursor = 'pointer';
 
-// Poziționare în partea stângă la mijlocul paginii
 cercAlb.style.position = 'fixed';
 cercAlb.style.left = '10px';
 cercAlb.style.top = '50%';
@@ -30,18 +30,27 @@ cercNegru.style.top = 'calc(50% + 30px)';
 cercNegru.style.transform = 'translateY(-50%)';
 cercNegru.style.zIndex = '9999';
 
-// Adăugare în pagină
 document.body.appendChild(cercAlb);
 document.body.appendChild(cercNegru);
 
-// Funcția pentru tema zi
+// Funcție pentru aplicarea temei
+function applyTheme(theme) {
+    if (theme === 'dark') {
+        document.body.classList.add('dark-theme');
+    } else {
+        document.body.classList.remove('dark-theme');
+    }
+    localStorage.setItem('theme', theme);
+}
+
+// Încărcarea temei salvate
+const savedTheme = localStorage.getItem('theme') || 'light';
+applyTheme(savedTheme);
+
 cercAlb.addEventListener('click', function() {
-    document.body.style.backgroundColor = '#ffffff';
-    document.body.style.color = '#000000';
+    applyTheme('light');
 });
 
-// Funcția pentru tema noapte
 cercNegru.addEventListener('click', function() {
-    document.body.style.backgroundColor = '#000000';
-    document.body.style.color = '#ffffff';
+    applyTheme('dark');
 });
