@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Галерея цветов</title>
+    <title data-i18n="galleryTitle">Галерея цветов</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <nav class="navbar">
         <ul>
-            <li> Галерея цветов </li>
+            <li data-i18n="galleryTitle"> Галерея цветов </li>
             <li onclick="window.location.href='index.html'"> <img src="img/close.png" width="20px"> </li>
         </ul>
     </nav>
@@ -18,35 +18,43 @@
     <div class="galeria">
         <ul class="categoria">
             <li class="categoria-item">
-                <p class="categoria-nume">ахромные</p>
-                <a href="#" class="categoria-link">закрыть</a>
+                <p class="categoria-nume" data-i18n="achromatic">ахромные</p>
+                <a href="#" class="categoria-link" data-i18n="close">закрыть</a>
             </li>
             <li class="categoria-item">
-                <p class="categoria-nume">приглушённые</p>
-                <a href="#" class="categoria-link">закрыть</a>
+                <p class="categoria-nume" data-i18n="muted">приглушённые</p>
+                <a href="#" class="categoria-link" data-i18n="close">закрыть</a>
             </li>
             <li class="categoria-item">
-                <p class="categoria-nume">тёмные</p>
-                <a href="#" class="categoria-link">закрыть</a>
+                <p class="categoria-nume" data-i18n="dark">тёмные</p>
+                <a href="#" class="categoria-link" data-i18n="close">закрыть</a>
             </li>
             <li class="categoria-item">
-                <p class="categoria-nume">пастельные</p>
-                <a href="#" class="categoria-link">закрыть</a>
+                <p class="categoria-nume" data-i18n="pastel">пастельные</p>
+                <a href="#" class="categoria-link" data-i18n="close">закрыть</a>
             </li>
             <li class="categoria-item">
-                <p class="categoria-nume">яркие</p>
-                <a href="#" class="categoria-link">закрыть</a>
+                <p class="categoria-nume" data-i18n="bright">яркие</p>
+                <a href="#" class="categoria-link" data-i18n="close">закрыть</a>
             </li>
             <li class="categoria-item">
-                <p class="categoria-nume">неоновые</p>
-                <a href="#" class="categoria-link">закрыть</a>
+                <p class="categoria-nume" data-i18n="neon">неоновые</p>
+                <a href="#" class="categoria-link" data-i18n="close">закрыть</a>
             </li>
         </ul>
         <ul class="paleta-culori"></ul>
     </div>
 
+    <div id="language-selector" class="language-selector">
+        <button class="lang-main-btn" title="Выберите язык">RU</button>
+        <button class="lang-btn" data-lang="ru" title="Русский">RU</button>
+        <button class="lang-btn" data-lang="ro" title="Română">RO</button>
+        <button class="lang-btn" data-lang="en" title="English">EN</button>
+    </div>
+
     <script src="generator.js"></script>
     <script src="pallete.js"></script>
+    <script src="language.js"></script>
 
 </body>
 </html>
