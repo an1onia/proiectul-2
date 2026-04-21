@@ -321,7 +321,68 @@ body {
         height: 720px;
     }
 }
+/* Language Selector - Floating Circle */
+.language-selector {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    z-index: 1000;
+}
 
+.lang-main-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d4738a, #f0a6b5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.lang-main-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.lang-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 245, 248, 0.95);
+    color: #5a3e4a;
+    border: 1px solid rgba(244, 143, 177, 0.3);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.language-selector:hover .lang-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.lang-btn:hover {
+    background: rgba(244, 143, 177, 0.3);
+    transform: scale(1.1) translateY(0);
+}
 /* Анимация появления */
 @keyframes fadeInUp {
     from {

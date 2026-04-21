@@ -5,7 +5,15 @@ const translations = {
         hex: 'HEX:',
         rgb: 'RGB:',
         hsl: 'HSL:',
-        button: 'тыкни'
+        button: 'тыкни',
+        galleryTitle: 'Галерея цветов',
+        achromatic: 'ахромные',
+        muted: 'приглушённые',
+        dark: 'тёмные',
+        pastel: 'пастельные',
+        bright: 'яркие',
+        neon: 'неоновые',
+        close: 'закрыть'
     },
     ro: {
         title: 'Generator de culori',
@@ -13,7 +21,15 @@ const translations = {
         hex: 'HEX:',
         rgb: 'RGB:',
         hsl: 'HSL:',
-        button: 'apasă'
+        button: 'apasă',
+        galleryTitle: 'Galerie de culori',
+        achromatic: 'acromatice',
+        muted: 'estompate',
+        dark: 'întunecate',
+        pastel: 'pastel',
+        bright: 'strălucitoare',
+        neon: 'neon',
+        close: 'închide'
     },
     en: {
         title: 'Color Randomizer',
@@ -21,7 +37,15 @@ const translations = {
         hex: 'HEX:',
         rgb: 'RGB:',
         hsl: 'HSL:',
-        button: 'click'
+        button: 'click',
+        galleryTitle: 'Color Gallery',
+        achromatic: 'achromatic',
+        muted: 'muted',
+        dark: 'dark',
+        pastel: 'pastel',
+        bright: 'bright',
+        neon: 'neon',
+        close: 'close'
     }
 };
 
@@ -58,29 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
             setLanguage(lang);
             localStorage.setItem('language', lang);
             updateMainLanguageButton(lang);
-            
-            const selector = document.querySelector('.language-selector');
-            if (selector) {
-                selector.classList.remove('open');
-            }
         });
-    });
-    
-    const mainBtn = document.querySelector('.lang-main-btn');
-    if (mainBtn) {
-        mainBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const selector = document.querySelector('.language-selector');
-            if (selector) {
-                selector.classList.toggle('open');
-            }
-        });
-    }
-    
-    document.addEventListener('click', function() {
-        const selector = document.querySelector('.language-selector');
-        if (selector) {
-            selector.classList.remove('open');
-        }
     });
 });
